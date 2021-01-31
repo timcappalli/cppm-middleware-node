@@ -5,11 +5,11 @@ Node middleware for various integrations with Aruba CPPM
 
 ## Current Use Cases
 ### CPPM Outbound
-* Get CPPM active sessions (/cppm/session-count)
+* Get CPPM active sessions (`/cppm/session-count`)
 
 ### CPPM Inbound
-* Send Pushover Message w/ rate limiting (/pushover/send-message)
-* Update Home Assistant presence (/hass/presence-update)
+* Send Pushover Message w/ rate limiting (`/pushover/send-message`)
+* Update Home Assistant presence (`/hass/presence-update`)
 
 
 ## ENVs
