@@ -25,7 +25,7 @@ Node middleware for various integrations with Aruba CPPM
 
 `APP_USERNAME`: REQUIRED, string, username for HTTP Basic Auth
 
-`APP_PASSWORD`: REQUIRE, string, password for HTTP Basic Auth
+`APP_PASSWORD`: REQUIRED, string, password for HTTP Basic Auth
 
 `APP_DEBUG`: Optional, boolean, Default: false
 
