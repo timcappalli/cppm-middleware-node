@@ -13,7 +13,7 @@ async function updateHassPresence(hassEntityId, state) {
 			return response.data;
 		})
 		.catch((err) => {
-			console.log(err.response.data);
+			console.error(err.response.data);
 		});
 };
 

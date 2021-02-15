@@ -59,11 +59,11 @@ app.get('/cppm/session-count', async (req, res) => {
 
 // Home Assistant Endpoints
 app.post('/hass/presence-update', bodyParser.json(), async (req, res) => {
-    if (appDebug) { console.info(`[hass/presence-update] Request Body:\n${JSON.stringify(req.body, null, 2)}`) };
+    if (appDebug) { console.debug(`[hass/presence-update] Request Body:\n${JSON.stringify(req.body, null, 2)}`) };
 
     if (req.body['hassEntityId'] && req.body['state']) {
         hassResponse = await hass.updateHassPresence(req.body['hassEntityId'], req.body['state']);
-        if (appDebug) { console.info(`[hass/presence-update] Hass Response: \n${JSON.stringify(hassResponse, null, 2)}`) };
+        if (appDebug) { console.debug(`[hass/presence-update] Hass Response: \n${JSON.stringify(hassResponse, null, 2)}`) };
         res.status(200).send(hassResponse).end();
     } else {
         res.status(400).send({ sendPushoverMessage: "required keys missing" }).end();
@@ -93,11 +93,11 @@ app.post('/pushover/send-message', bodyParser.json(), async (req, res) => {
 
         }
     } else {
-        if (appDebug) { console.error(`[pushover/send-message] Invalid request. \n${JSON.stringify(req.body, null, 2)}`) };
+        if (appDebug) { console.debug(`[pushover/send-message] Invalid request. \n${JSON.stringify(req.body, null, 2)}`) };
         res.status(400).send({ message: "required keys missing" }).end();
     }
 });
 
 // Start web server
 var httpsServer = http.createServer(app);
-httpsServer.listen(webPort, () => console.log(`App now running on port ${webPort}!\nDebug: ${appDebug}`));
+httpsServer.listen(webPort, () => console.info(`App now running on port ${webPort}!\nDebug: ${appDebug}`));
