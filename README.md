@@ -1,7 +1,7 @@
 # CPPM Middleware Node.js
 Node middleware for various integrations with Aruba CPPM
 
-**Current Version**: 2021.01.31
+**Current Version**: 2021.02.15
 
 ## Current Use Cases
 ### CPPM Outbound
@@ -23,9 +23,9 @@ Node middleware for various integrations with Aruba CPPM
 
 `HASS_FQDN`: REQUIRED, string, Home Assistant FQDN
 
-`APP_USERNAME`: REQUIRED, string, username for HTTP Basic Auth
+`APP_USERNAME`: Optional, string, username for HTTP Basic Auth (auth enabled when both username and password are set)
 
-`APP_PASSWORD`: REQUIRED, string, password for HTTP Basic Auth
+`APP_PASSWORD`: Optional, string, password for HTTP Basic Auth (auth enabled when both username and password are set)
 
 `APP_DEBUG`: Optional, boolean, Default: false
 

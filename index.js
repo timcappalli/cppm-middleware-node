@@ -44,7 +44,6 @@ if (typeof process.env.APP_USERNAME !== 'undefined' && typeof process.env.APP_PA
     }));
 };
 
-
 // Root - Return 200
 app.get('/', async (req, res) => {
     res.status(200).end();
