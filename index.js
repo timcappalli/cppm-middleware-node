@@ -12,7 +12,7 @@ const cppm = require('./cppm');
 const hass = require('./hass');
 
 // ENVs
-let requiredEnv = ['CPPM_FQDN', 'CPPM_CLIENT_ID', 'CPPM_CLIENT_SECRET', 'HASS_TOKEN', 'HASS_FQDN', 'APP_USERNAME', 'APP_PASSWORD'];
+let requiredEnv = ['CPPM_FQDN', 'CPPM_CLIENT_ID', 'CPPM_CLIENT_SECRET', 'HASS_TOKEN', 'HASS_FQDN'];
 let unsetEnv = requiredEnv.filter((env) => !(typeof process.env[env] !== 'undefined'));
 if (unsetEnv.length > 0) {
     throw new Error("Required ENV variables are not set: [" + unsetEnv.join(', ') + "]")
@@ -35,12 +35,15 @@ const app = express();
 if (appDebug) { app.use(morgan('combined')) };
 
 // HTTP Basic Auth
-let users = {};
-users[process.env.APP_USERNAME] = process.env.APP_PASSWORD;
-app.use(basicAuth({
-    users,
-    challenge: true
-}));
+if (typeof process.env.APP_USERNAME !== 'undefined' && typeof process.env.APP_PASSWORD !== 'undefined') {
+    let users = {};
+    users[process.env.APP_USERNAME] = process.env.APP_PASSWORD;
+    app.use(basicAuth({
+        users,
+        challenge: true
+    }));
+};
+
 
 // Root - Return 200
 app.get('/', async (req, res) => {
