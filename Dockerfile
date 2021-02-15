@@ -1,5 +1,5 @@
 FROM alpine
-LABEL version="2021.01.31"
+LABEL version="2021.02.15"
 RUN apk add --update nodejs nodejs-npm
 WORKDIR /app
 COPY package*.json ./
