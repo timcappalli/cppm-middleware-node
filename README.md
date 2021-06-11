@@ -1,7 +1,7 @@
 # CPPM Middleware Node.js
 Node middleware for various integrations with Aruba CPPM
 
-**Current Version**: 2021.02.15
+**Current Version**: 2021.06.10
 
 ## Current Use Cases
 ### CPPM Outbound

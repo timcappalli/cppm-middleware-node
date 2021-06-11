@@ -63,12 +63,16 @@ app.get('/cppm/session-count', async (req, res) => {
 app.post('/hass/presence-update', bodyParser.json(), async (req, res) => {
     if (appDebug) { console.debug(`[hass/presence-update] Request Body:\n${JSON.stringify(req.body, null, 2)}`) };
 
-    if (req.body['hassEntityId'] && req.body['state']) {
-        hassResponse = await hass.updateHassPresence(req.body['hassEntityId'], req.body['state']);
+    if (req.body.entity_id && req.body.state) {
+        hassResponse = await hass.updateHassPresence(req.body);
         if (appDebug) { console.debug(`[hass/presence-update] Hass Response: \n${JSON.stringify(hassResponse, null, 2)}`) };
-        res.status(200).send(hassResponse).end();
+        if (hassResponse) {
+            res.status(200).send(hassResponse).end();
+        } else {
+            res.status(500).end();
+        }
     } else {
-        res.status(400).send({ sendPushoverMessage: "required keys missing" }).end();
+        res.status(400).send({ error: "required keys missing" }).end();
     }
 });
 
