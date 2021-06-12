@@ -1,11 +1,12 @@
 # CPPM Middleware Node.js
 Node middleware for various integrations with Aruba CPPM
 
-**Current Version**: 2021.06.10
+**Current Version**: 2021.06.11
 
 ## Current Use Cases
 ### CPPM Outbound
 * Get CPPM active sessions (`/cppm/session-count`)
+* Check if session is active (`/cppm/session-check?field=sessionfieldname&value=sessionfieldvalue`)
 
 ### CPPM Inbound
 * Send Pushover Message w/ rate limiting (`/pushover/send-message`)

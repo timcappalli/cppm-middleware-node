@@ -58,6 +58,25 @@ app.get('/cppm/session-count', async (req, res) => {
         res.status(500).end();
     }
 });
+//
+app.get('/cppm/session-check', async (req, res) => {
+    if (req.query.field && req.query.value) {
+        try {
+            activeSession = await cppm.activeCppmSession(req.query.field, req.query.value);
+
+            if (typeof activeSession !== "undefined") {
+                res.send(activeSession).status(200).end();
+            } else {
+                res.status(500).end();
+            }
+        } catch {
+            res.status(500).end();
+        }
+    } else {
+        res.status(400).send({ error: "required query params missing" }).end();
+    }
+
+});
 
 // Home Assistant Endpoints
 app.post('/hass/presence-update', bodyParser.json(), async (req, res) => {

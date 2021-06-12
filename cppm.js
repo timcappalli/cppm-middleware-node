@@ -89,4 +89,30 @@ async function fetchCppmSessionCount() {
 		});
 };
 
-module.exports = { fetchCppmSessionCount };
+async function activeCppmSession(field, value) {
+	let token = await getCppmToken();
+
+	filterData = {};
+	filterData[field] = value;
+
+	const config = {
+		timeout: 10000,
+		method: 'get',
+		headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+		params: { 'calculate_count': 'true', 'limit': 1, 'filter': { '$and': [ filterData, { 'acctstoptime': { '$exists': false } }] } },
+		url: `https://${process.env.CPPM_FQDN}/api/session`,
+	};
+	return axios.request(config)
+		.then((response) => {
+			if (response.data.count === 0) {
+				return false;
+			} else {
+				return true;
+			}
+		})
+		.catch((err) => {
+			console.error(err.response.data);
+		});
+};
+
+module.exports = { fetchCppmSessionCount, activeCppmSession };
